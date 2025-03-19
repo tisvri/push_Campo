@@ -29,28 +29,28 @@ jobs:
           pip install --upgrade pip  
           pip install -r requirements.txt  
       - name: Run the Python script
-      
+        env:
+            ACTIONS_STEP_DEBUG: true
+            API_USERNAME: "${{ vars.API_USERNAME }}"
+            API_PASSWORD: "${{ vars.API_PASSWORD }}"
+            API_URL: "${{ vars.API_URL }}"
+            DESTINATARIO_HMCG: "${{ vars.DESTINATARIO_HMCG }}"
+            DESTINATARIO_ROCIO: "${{ vars.DESTINATARIO_ROCIO }}"
+            DESTINATARIO_SCS: "${{ vars.DESTINATARIO_SCS }}"
+            DESTINATARIO_IIR: "${{ vars.DESTINATARIO_IIR }}"
+            DESTINATARIO_VIVIANE: "${{ vars.DESTINATARIO_VIVIANE }}"
+            DESTINATARIO_CAPIBERIBE: "${{ vars.DESTINATARIO_CAPIBERIBE }}"
+            ENVIAR_PARA: "${{ vars.ENVIAR_PARA }}"
+            ENVIO_PARA: "${{ vars.ENVIO_PARA }}"
+            EMAIL_USERNAME: "${{ vars.EMAIL_USERNAME }}"
+            EMAIL_PASSWORD: "${{ vars.EMAIL_PASSWORD }}"
+            EMAIL_SERVER: "${{ vars.EMAIL_SERVER }}"
+            EMAIL_PORT: "${{ vars.EMAIL_PORT }}"
+        shell: bash
         run: |
           source venv/bin/activate  
           jupyter nbconvert --to notebook --execute --inplace push_campo.ipynb
-          env:
-            ACTIONS_STEP_DEBUG: true
-            API_USERNAME: "${{vars.API_USERNAME}}"
-            API_PASSWORD: "${{vars.API_PASSWORD}}"
-            API_URL: "${{vars.API_URL}}"
-            DESTINATARIO_HMCG: "${{vars.DESTINATARIO_HMCG}}"
-            DESTINATARIO_ROCIO: "${{vars.DESTINATARIO_ROCIO}}"
-            DESTINATARIO_SCS: "${{vars.DESTINATARIO_SCS}}"
-            DESTINATARIO_IIR: "${{vars.DESTINATARIO_IIR}}"
-            DESTINATARIO_VIVIANE: "${{vars.DESTINATARIO_VIVIANE}}"
-            DESTINATARIO_CAPIBERIBE: "${{vars.DESTINATARIO_CAPIBERIBE}}"
-            ENVIAR_PARA: "${{vars.ENVIAR_PARA}}"
-            ENVIO_PARA: "${{vars.ENVIO_PARA}}"
-            EMAIL_USERNAME: "${{vars.EMAIL_USERNAME}}"
-            EMAIL_PASSWORD: "${{vars.EMAIL_PASSWORD}}"
-            EMAIL_SERVER: "${{vars.EMAIL_SERVER}}"
-            EMAIL_PORT: "${{vars.EMAIL_PORT}}"
-        shell: bash
+
       - name: commiting notebook
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
