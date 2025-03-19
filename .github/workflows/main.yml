@@ -30,6 +30,7 @@ jobs:
           pip install -r requirements.txt  
       - name: Run the Python script
         env:
+            ACTIONS_STEP_DEBUG: true
             API_USERNAME: "${{vars.API_USERNAME}}"
             API_PASSWORD: "${{vars.API_PASSWORD}}"
             API_URL: "${{vars.API_URL}}"
