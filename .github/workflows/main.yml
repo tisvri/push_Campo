@@ -12,6 +12,7 @@ permissions:
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
+    environment: email
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
