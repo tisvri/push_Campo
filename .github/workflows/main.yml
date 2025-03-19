@@ -29,7 +29,11 @@ jobs:
           pip install --upgrade pip  
           pip install -r requirements.txt  
       - name: Run the Python script
-        env:
+      
+        run: |
+          source venv/bin/activate  
+          jupyter nbconvert --to notebook --execute --inplace push_campo.ipynb
+          env:
             ACTIONS_STEP_DEBUG: true
             API_USERNAME: "${{vars.API_USERNAME}}"
             API_PASSWORD: "${{vars.API_PASSWORD}}"
@@ -46,9 +50,6 @@ jobs:
             EMAIL_PASSWORD: "${{vars.EMAIL_PASSWORD}}"
             EMAIL_SERVER: "${{vars.EMAIL_SERVER}}"
             EMAIL_PORT: "${{vars.EMAIL_PORT}}"
-        run: |
-          source venv/bin/activate  
-          jupyter nbconvert --to notebook --execute --inplace push_campo.ipynb
         shell: bash
       - name: commiting notebook
         uses: stefanzweifel/git-auto-commit-action@v5
